@@ -44,6 +44,7 @@ function News({ data, isError, timeAgo,  fallBackImg, cat}) {
                 <p>{timeAgo(item.publishedAt)}</p>
               </div>
               <h2 key={index}>{item.title}</h2>
+              <p className='description'>{item.description}</p>
             </li>
           ))
         )}

@@ -60,6 +60,7 @@ body{
     h1{
       display: inline;
       padding-right: 0.5em;
+      margin-bottom: 5vh;
     }
     #General{
       background: linear-gradient(to top, #FFA5CD 50%, transparent 50%);
@@ -80,40 +81,54 @@ body{
       background: linear-gradient(to top, #ff7070 50%, transparent 50%);        
     }
     ul{
+      margin-top: 10vh;
       display: flex;
       flex-wrap: wrap;
       list-style: none;
       align-items: center;
       justify-content: center;
-      gap: 10vw;
+      gap: 5vw;
+      li:first-child{
+        width: 70vw;
+        img{
+          height: 50vh;
+          width: 70vw;
+        }
+        .description{
+          display: block;
+        }
+      }
       li{
         width: 30vw;
-      }
-      img{
-        height: 40vh;
-        width: 30vw;
-        object-fit: cover;
-        border-radius: 5px;
-      }
-      h2{
-        font-size: 20px;
-      }
-      .article-info{
-        font-family: "Montserrat", sans-serif;
-        font-size: 10px;
-        display: flex;
-        align-items: center;
-        a{
-          color: #2B2D42;
+        img{
+          height: 40vh;
+          width: 30vw;
+          object-fit: cover;
+          border-radius: 5px;
         }
-        a:hover{
-          color: #000000;
+        h2{
+          font-size: 20px;
         }
-        hr{
-          width: 10px;
-          margin: 0 20px;
-          height: 0px;
-          border: solid #61647a 0.2px;
+        .description{
+          display: none;
+        }
+        .article-info{
+          font-family: "Montserrat", sans-serif;
+          font-size: 10px;
+          display: flex;
+          align-items: center;
+          a{
+            color: #2B2D42;
+          }
+          a:hover{
+            color: #000000;
+          }
+          hr{
+            width: 10px;
+            margin: 0 20px;
+            height: 0px;
+            border: solid #61647a 0.2px;
+          }
         }
       }
     }
