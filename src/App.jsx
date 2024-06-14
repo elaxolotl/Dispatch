@@ -10,7 +10,7 @@ function Search({ searchTerm }) {
   )
 }
 
-function News({ data, isError }) {
+function News({ data, isError, timeAgo }) {
   return (
     <div className="news">
       <ul>
@@ -20,7 +20,10 @@ function News({ data, isError }) {
           data.map((item, index) => (
             <li>
               <img src={item.urlToImage}></img>
-              <div className="article-info"><a href={item.source.name} target='_blank'>{item.author}</a><hr /></div>
+              <div className="article-info">
+                <a href={item.url} target='_blank'>{item.source.name}</a><hr />
+                <p>{timeAgo(item.publishedAt)}</p>
+              </div>
               <h1 key={index}>{item.title}</h1>
             </li>
           ))
@@ -51,6 +54,32 @@ function App() {
     };
     fetchData();
   }, [url]);
+
+  //gets the time difference of when the article was published//
+  function timeAgo(publishedAt) {
+    const publishTime = new Date(publishedAt);
+    const now = new Date();
+    const timeDiff = now - publishTime;
+  
+    const seconds = Math.floor(timeDiff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const weeks = Math.floor(days / 7);
+  
+    if (seconds < 60) {
+      return `${seconds} seconds ago`;
+    } else if (minutes < 60) {
+      return `${minutes} minute(s) ago`;
+    } else if (hours < 24) {
+      return `${hours} hour(s) ago`;
+    } else if (days < 7) {
+      return `${days} day(s) ago`;
+    } else {
+      return `${weeks} week(s) ago`;
+    }
+  }
+
   return (
     <>
       <header>
@@ -60,7 +89,7 @@ function App() {
         <h1>.Dispatch</h1>
       </header>
       <hr />
-      <News data={data} isError={isError} />
+      <News data={data} isError={isError} timeAgo={timeAgo}/>
     </>
   );
 }
