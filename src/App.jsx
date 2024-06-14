@@ -10,7 +10,7 @@ function Search({ searchTerm }) {
   )
 }
 
-function News({ data, isError, timeAgo }) {
+function News({ data, isError, timeAgo,  fallBackImg}) {
   return (
     <div className="news">
       <ul>
@@ -19,7 +19,11 @@ function News({ data, isError, timeAgo }) {
         ) : (
           data.map((item, index) => (
             <li>
-              <img src={item.urlToImage}></img>
+              <img
+                src={item.urlToImage || fallBackImg}
+                onError={(e) => e.target.src = fallBackImg}
+                alt="Article"
+              />
               <div className="article-info">
                 <a href={item.url} target='_blank'>{item.source.name}</a><hr />
                 <p>{timeAgo(item.publishedAt)}</p>
@@ -39,6 +43,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
   var url = `https://newsapi.org/v2/everything?q=tesla&from=2024-05-14&sortBy=publishedAt&apiKey=${apiKey}`
+  const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
 
   //fatches data from api
   useEffect(() => {
@@ -60,13 +65,13 @@ function App() {
     const publishTime = new Date(publishedAt);
     const now = new Date();
     const timeDiff = now - publishTime;
-  
+
     const seconds = Math.floor(timeDiff / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
     const weeks = Math.floor(days / 7);
-  
+
     if (seconds < 60) {
       return `${seconds} seconds ago`;
     } else if (minutes < 60) {
@@ -89,7 +94,7 @@ function App() {
         <h1>.Dispatch</h1>
       </header>
       <hr />
-      <News data={data} isError={isError} timeAgo={timeAgo}/>
+      <News data={data} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />
     </>
   );
 }
