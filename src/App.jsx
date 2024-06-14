@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import './App.css'
 import { IoSearch } from "react-icons/io5";
 
-function Search({handleSearch }) {
+function Search({ handleSearch }) {
   return (
     <div className="search">
-      <input type="text" placeholder='Search' onChange={handleSearch}/>
+      <input type="text" placeholder='Search' onChange={handleSearch} />
     </div>
   )
 }
 
-function Nav( {handleLink, cat}){
-  const navItems = ["General","Business", "Entertainment", "Sports", "Technology", "Science"]
-  return(
+function Nav({ handleLink, cat }) {
+  const navItems = ["General", "Business", "Entertainment", "Sports", "Technology", "Science"]
+  return (
     <nav>
       <ul>
-        {navItems.map((item) =>( 
-            <button key={item} className={cat == item ? "selected" : ""} onClick={handleLink}><li>{item}</li></button>
+        {navItems.map((item) => (
+          <button key={item} className={cat == item ? "selected" : ""} onClick={handleLink}><li>{item}</li></button>
         ))}
       </ul>
     </nav>
   )
 }
 
-function News({ data, isError, timeAgo,  fallBackImg, cat}) {
+function News({ data, isError, timeAgo, fallBackImg, cat }) {
   return (
     <div className="news">
       <h1 id={cat}>{cat}</h1>
@@ -106,7 +106,7 @@ function App() {
   }
 
   //sets the typed text in the input box
-  const handleSearch = (event) =>{
+  const handleSearch = (event) => {
     setSearchTerm(event.target.value)
   }
 
@@ -116,23 +116,40 @@ function App() {
   );
 
   const handleLink = (event) => {
-    var category=event.target.innerText
+    var category = event.target.innerText
     setCat(category)
     setLink(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=`)
   }
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('header');
+      if (window.pageYOffset > 250) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <header>
-        <Search searchTerm={searchTerm} handleSearch={handleSearch}/>
-        <button><IoSearch />
-        </button>
+        <Search searchTerm={searchTerm} handleSearch={handleSearch} />
+        <span><IoSearch />
+        </span>
         <h1>.Dispatch</h1>
+        <a href='#'><button>Subscribe Now</button></a>
       </header>
-      <Nav handleLink={handleLink} cat={cat}/>
+      <Nav handleLink={handleLink} cat={cat} />
       <hr />
-      {isLoading? (<p>Loading...</p>):<News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} cat={cat}/>}
-      
+      {isLoading ? (<p>Loading...</p>) : <News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} cat={cat} />}
+
     </>
   );
 }
