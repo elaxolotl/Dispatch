@@ -13,6 +13,8 @@ function Search({handleSearch }) {
 function News({ data, isError, timeAgo,  fallBackImg}) {
   return (
     <div className="news">
+      <h1>Top Headlines</h1>
+      <div id='highlight'></div>
       <ul>
         {isError ? (
           <p>Error fetching news.</p>
@@ -28,7 +30,7 @@ function News({ data, isError, timeAgo,  fallBackImg}) {
                 <a href={item.url} target='_blank'>{item.source.name}</a><hr />
                 <p>{timeAgo(item.publishedAt)}</p>
               </div>
-              <h1 key={index}>{item.title}</h1>
+              <h2 key={index}>{item.title}</h2>
             </li>
           ))
         )}
@@ -43,7 +45,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
   const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
-  var url = `https://newsapi.org/v2/everything?q=tesla&from=2024-05-14&sortBy=publishedAt&apiKey=${apiKey}`
+  var url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
   const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
 
   //fatches data from api
