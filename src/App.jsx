@@ -32,26 +32,31 @@ function News({ data, isError, timeAgo, fallBackImg, cat }) {
         {isError ? (
           <p>Error fetching news.</p>
         ) : (
-          data.map((item, index) => (
-            <li>
-              <img
-                src={item.urlToImage || fallBackImg}
-                onError={(e) => e.target.src = fallBackImg}
-                alt="Article"
-              />
-              <div className="article-info">
-                <a href={item.url} target='_blank'>{item.source.name}</a><hr />
-                <p>{timeAgo(item.publishedAt)}</p>
-              </div>
-              <h2 key={index}>{item.title}</h2>
-              <p className='description'>{item.description}</p>
-            </li>
-          ))
+          data.length > 0 ? (
+            data.map((item, index) => (
+              <li key={index}>
+                <img
+                  src={item.urlToImage || fallBackImg}
+                  onError={(e) => e.target.src = fallBackImg}
+                  alt="Article"
+                />
+                <div className="article-info">
+                  <a href={item.url} target='_blank'>{item.source?.name}</a><hr />
+                  <p>{timeAgo(item.publishedAt)}</p>
+                </div>
+                <h2>{item.title}</h2>
+                <p className='description'>{item.description}</p>
+              </li>
+            ))
+          ) : (
+            <p>No articles found.</p>
+          )
         )}
       </ul>
     </div>
   )
 }
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
