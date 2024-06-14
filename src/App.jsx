@@ -10,10 +10,23 @@ function Search({handleSearch }) {
   )
 }
 
-function News({ data, isError, timeAgo,  fallBackImg}) {
+function Nav( {handleLink, cat}){
+  const navItems = ["General","Business", "Entertainment", "Sports", "Technology", "Science"]
+  return(
+    <nav>
+      <ul>
+        {navItems.map((item) =>( 
+            <button key={item} className={cat == item ? "selected" : ""} onClick={handleLink}><li>{item}</li></button>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+function News({ data, isError, timeAgo,  fallBackImg, cat}) {
   return (
     <div className="news">
-      <h1>Top Headlines</h1>
+      <h1 id={cat}>{cat}</h1>
       <div id='highlight'></div>
       <ul>
         {isError ? (
@@ -44,8 +57,10 @@ function App() {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
+  const [link, setLink] = useState("https://newsapi.org/v2/top-headlines?country=us&apiKey=")
+  const [cat, setCat] = useState("General")
   const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
-  var url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+  var url = `${link}${apiKey}`
   const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
 
   //fatches data from api
@@ -99,6 +114,12 @@ function App() {
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleLink = (event) => {
+    var category=event.target.innerText
+    setCat(category)
+    setLink(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=`)
+  }
+
   return (
     <>
       <header>
@@ -107,8 +128,9 @@ function App() {
         </button>
         <h1>.Dispatch</h1>
       </header>
+      <Nav handleLink={handleLink} cat={cat}/>
       <hr />
-      {isLoading? (<p>Loading...</p>):<News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />}
+      {isLoading? (<p>Loading...</p>):<News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} cat={cat}/>}
       
     </>
   );

@@ -30,11 +30,54 @@ body{
       margin-bottom: 10vh;
     }
   }
+  nav{
+    ul{
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1vw;
+    }
+    button{
+      background-color: transparent;
+      border: none;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+    }
+    button:hover{
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 20px;
+      text-decoration-thickness: 1.5px;
+    }
+    button.selected{
+      text-decoration: underline;
+      text-underline-offset: 20px;
+      text-decoration-thickness: 3px;
+    }
+  }
   .news{
     h1{
       display: inline;
-      background: linear-gradient(to top, #FFA5CD 50%, transparent 50%);
       padding-right: 0.5em;
+    }
+    #General{
+      background: linear-gradient(to top, #FFA5CD 50%, transparent 50%);
+    }
+    #Business{
+      background: linear-gradient(to top, #FC9069 50%, transparent 50%);        
+    }
+    #Entertainment{
+      background: linear-gradient(to top, #FAC650 50%, transparent 50%);        
+    }
+    #Sports{
+      background: linear-gradient(to top, #b9ff5e 50%, transparent 50%);        
+    }
+    #Technology{
+      background: linear-gradient(to top, #70D2FF 50%, transparent 50%);        
+    }
+    #Science{
+      background: linear-gradient(to top, #ff7070 50%, transparent 50%);        
     }
     ul{
       display: flex;
