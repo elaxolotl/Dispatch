@@ -1,80 +1,66 @@
 import React, { useEffect, useState } from 'react';
+import './App.css'
+import { IoSearch } from "react-icons/io5";
 
-function App() {
-  const [data, setData] = useState([]);
-  const [isError, setIsError] = useState(false);
-  const url = "https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=2f456dcee252d66d2a8546e7df70af9d";
-
-  //fetches the articles from the api//
-  useEffect(() => {
-    function getNews() {
-      fetch(url)
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.articles);
-        })
-        .catch(() => {
-          setIsError(true);
-        });
-    }
-    getNews();
-  }, [url]);
-
-  //gets the time difference of when the article was published//
-  function timeAgo(articleDate) {
-    const now = new Date();
-    const past = new Date(articleDate);
-
-    const seconds = Math.floor((now - past) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-    const weeks = Math.floor(days / 7);
-    const months = Math.floor(days / 30);
-    const years = Math.floor(days / 365);
-
-    if (years > 0) {
-        return years === 1 ? "1 year ago" : `${years} years ago`;
-    }
-    if (months > 0) {
-        return months === 1 ? "1 month ago" : `${months} months ago`;
-    }
-    if (weeks > 0) {
-        return weeks === 1 ? "1 week ago" : `${weeks} weeks ago`;
-    }
-    if (days > 0) {
-        return days === 1 ? "1 day ago" : `${days} days ago`;
-    }
-    if (hours > 0) {
-        return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
-    }
-    if (minutes > 0) {
-        return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
-    }
-    return seconds === 1 ? "1 second ago" : `${seconds} seconds ago`;
+function Search({ searchTerm }) {
+  return (
+    <div className="search">
+      <input type="text" placeholder='Search' />
+    </div>
+  )
 }
 
+function News({ data, isError }) {
+  return (
+    <div className="news">
+      <ul>
+        {isError ? (
+          <p>Error fetching news.</p>
+        ) : (
+          data.map((item, index) => (
+            <li>
+              <img src={item.urlToImage}></img>
+              <div className="article-info"><a href={item.source.name} target='_blank'>{item.author}</a><hr /></div>
+              <h1 key={index}>{item.title}</h1>
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
+  )
+}
+
+function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
+  var url = `https://newsapi.org/v2/everything?q=tesla&from=2024-05-14&sortBy=publishedAt&apiKey=${apiKey}`
+
+  //fatches data from api
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log(result);
+        setData(result.articles);
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+    fetchData();
+  }, [url]);
   return (
     <>
       <header>
-        Dispatch
+        <Search searchTerm={searchTerm} />
+        <button><IoSearch />
+        </button>
+        <h1>.Dispatch</h1>
       </header>
-      <div className="news">
-        <ul>
-          {isError ? (
-            <p>Error fetching news.</p>
-          ) : (
-            data.map((item, index) => (
-              <li>
-                <img src={item.image}></img>
-                <a href={item.source.url}>{item.source.name}</a>
-                <p>{timeAgo(item.publishedAt)}</p>
-                <h1 key={index}>{item.title}</h1>
-              </li>
-            ))
-          )}
-        </ul>
-      </div>
+      <hr />
+      <News data={data} isError={isError} />
     </>
   );
 }

@@ -1,42 +1,71 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+  margin: 5vh 5vw;
+  font-family: "Lora", serif;
+  background-color: #f6f2e9;
+  color: #2B2D42;
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+    input{
+      background-color: transparent;
+      border: solid 2px #2B2D42;
+      border-radius: 20px;
+      padding: 10px 15px;
+      font-family: "Montserrat", sans-serif;
+    }
+    button{
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      margin-left: -14vw;
+      font-size: 15px;
+    }
+    h1{
+      font-size: 4vw;
+      text-align: center;
+      margin-bottom: 10vh;
+    }
   }
-  to {
-    transform: rotate(360deg);
+  ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10vw;
+    li{
+      width: 30vw;
+    }
+    img{
+      height: 40vh;
+      width: 30vw;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    h1{
+      font-size: 20px;
+    }
+    .article-info{
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      a{
+        color: #2B2D42;
+      }
+      a:hover{
+        color: #000000;
+      }
+      hr{
+        width: 10px;
+        margin: 0 20px;
+        height: 0px;
+        border: solid #61647a 0.2px;
+      }
+    }
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
