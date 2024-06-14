@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './App.css'
 import { IoSearch } from "react-icons/io5";
 
-function Search({ searchTerm }) {
+function Search({handleSearch }) {
   return (
     <div className="search">
-      <input type="text" placeholder='Search' />
+      <input type="text" placeholder='Search' onChange={handleSearch}/>
     </div>
   )
 }
@@ -47,11 +47,11 @@ function App() {
 
   //fatches data from api
   useEffect(() => {
+    if (!searchTerm) return;
     const fetchData = async () => {
       try {
         const response = await fetch(url);
         const result = await response.json();
-        console.log(result);
         setData(result.articles);
       } catch (error) {
         setIsError(true);
@@ -85,16 +85,26 @@ function App() {
     }
   }
 
+  //sets the typed text in the input box
+  const handleSearch = (event) =>{
+    setSearchTerm(event.target.value)
+  }
+
+  //filters the news when search
+  const filteredArticles = data.filter((item) =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <header>
-        <Search searchTerm={searchTerm} />
+        <Search searchTerm={searchTerm} handleSearch={handleSearch}/>
         <button><IoSearch />
         </button>
         <h1>.Dispatch</h1>
       </header>
       <hr />
-      <News data={data} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />
+      <News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />
     </>
   );
 }
