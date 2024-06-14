@@ -41,18 +41,20 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
   var url = `https://newsapi.org/v2/everything?q=tesla&from=2024-05-14&sortBy=publishedAt&apiKey=${apiKey}`
   const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
 
   //fatches data from api
   useEffect(() => {
-    if (!searchTerm) return;
+    setIsLoading(true)
     const fetchData = async () => {
       try {
         const response = await fetch(url);
         const result = await response.json();
         setData(result.articles);
+        setIsLoading(false)
       } catch (error) {
         setIsError(true);
       }
@@ -104,7 +106,8 @@ function App() {
         <h1>.Dispatch</h1>
       </header>
       <hr />
-      <News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />
+      {isLoading? (<p>Loading...</p>):<News data={filteredArticles} isError={isError} timeAgo={timeAgo} fallBackImg={fallBackImg} />}
+      
     </>
   );
 }
