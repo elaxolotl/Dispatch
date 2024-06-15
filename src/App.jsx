@@ -71,12 +71,15 @@ function App() {
 
   //fatches data from api
   useEffect(() => {
-    setIsLoading(true)
     const fetchData = async () => {
+      setIsLoading(true)
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const result = await response.json();
-        setData(result.articles);
+        setData(result.articles || []);                                 
         setIsLoading(false)
       } catch (error) {
         setIsError(true);
