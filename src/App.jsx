@@ -36,12 +36,12 @@ function News({ data, isError, timeAgo, fallBackImg, cat }) {
             data.map((item, index) => (
               <li key={index}>
                 <img
-                  src={item.urlToImage || fallBackImg}
+                  src={item.image || fallBackImg}
                   onError={(e) => e.target.src = fallBackImg}
                   alt="Article"
                 />
                 <div className="article-info">
-                  <a href={item.url} target='_blank'>{item.source?.name}</a><hr />
+                  <a href={item.source.url} target='_blank'>{item.source?.name}</a><hr />
                   <p>{timeAgo(item.publishedAt)}</p>
                 </div>
                 <h2>{item.title}</h2>
@@ -63,9 +63,9 @@ function App() {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
-  const [link, setLink] = useState("https://newsapi.org/v2/top-headlines?country=us&apiKey=")
+  const [link, setLink] = useState("https://gnews.io/api/v4/search?&q=None&lang=en&country=us&max=10&apikey=")
   const [cat, setCat] = useState("General")
-  const apiKey = "ad00c3fdf07b4a0aa7626ea97aed717e"
+  const apiKey = "2f456dcee252d66d2a8546e7df70af9d"
   var url = `${link}${apiKey}`
   const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
 
@@ -79,7 +79,7 @@ function App() {
           throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        setData(result.articles || []);                                 
+        setData(result.articles || []);                                   
         setIsLoading(false)
       } catch (error) {
         setIsError(true);
@@ -126,7 +126,7 @@ function App() {
   const handleLink = (event) => {
     var category = event.target.innerText
     setCat(category)
-    setLink(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=`)
+    setLink(`https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&category=${category.toLowerCase()}&apikey=`)
   }
 
 
