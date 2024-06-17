@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
 import { IoSearch } from "react-icons/io5";
+import { IoGlobeOutline } from "react-icons/io5";
+import ReactCountryFlag from "react-country-flag"
 
 function Search({ handleSearch }) {
   return (
@@ -63,8 +65,9 @@ function App() {
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
-  const [link, setLink] = useState("https://gnews.io/api/v4/search?&q=None&lang=en&country=us&max=10&apikey=")
   const [cat, setCat] = useState("General")
+  const [region, setRegion] = useState("us")
+  const [link, setLink] = useState(`https://gnews.io/api/v4/search?&q=None&lang=en&country=${region}&max=10&apikey=`)
   const apiKey = "2f456dcee252d66d2a8546e7df70af9d"
   var url = `${link}${apiKey}`
   const fallBackImg = "https://cdn.britannica.com/25/93825-050-D1300547/collection-newspapers.jpg"
@@ -79,7 +82,7 @@ function App() {
           throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        setData(result.articles || []);                                   
+        setData(result.articles || []);
         setIsLoading(false)
       } catch (error) {
         setIsError(true);
@@ -145,14 +148,29 @@ function App() {
     };
   }, []);
 
+  //changes region
+  const handleRegion = (event) => {
+    var c = event.target.className
+    setRegion(c)
+    setLink(`https://gnews.io/api/v4/search?&q=None&lang=en&country=${c.toLowerCase()}&max=10&apikey=`)
+  }
+
+  const regions = ["BR", "CN", "EG", "JP", "ES", "GB", "US"];
   return (
     <>
       <header>
-        <Search searchTerm={searchTerm} handleSearch={handleSearch} />
-        <span><IoSearch />
-        </span>
-        <h1>.Dispatch</h1>
-        <a href='#'><button>Subscribe Now</button></a>
+        <div className="region"><IoGlobeOutline />
+          <ul className='countries'>
+            {regions.map((item) => (<li onClick={handleRegion} ><ReactCountryFlag id='flag' className={item} countryCode={item} svg /></li>))}
+          </ul>
+        </div>
+        <div className="center-content">
+          <Search searchTerm={searchTerm} handleSearch={handleSearch} />
+          <span><IoSearch />
+          </span>
+          <h1>.Dispatch</h1>
+          <a href='#'><button>Subscribe Now</button></a>
+        </div>
       </header>
       <Nav handleLink={handleLink} cat={cat} />
       <hr />

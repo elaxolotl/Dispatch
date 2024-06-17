@@ -1,16 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-body{
+
+body {
   margin: 5vh 5vw;
   font-family: "Lora", serif;
   background-color: #f6f2e9;
   color: #2B2D42;
-  header{
+
+  header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 5vw;
-    input{
+
+    .region{
+      font-size: 2vw;
+    }
+
+    .region:hover {
+      cursor: pointer;
+    }
+
+    .countries {
+      position: absolute;
+      opacity: 0;
+      list-style: none;
+      gap: 1vw;
+      background-color: #f6f2e9;
+      border-radius: 5px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      padding: 5px 10px;
+
+      li {
+        font-size: 30px;
+      }
+    }
+
+    .region:hover .countries {
+      opacity: 1;
+      transition: 0.2s;
+    }
+
+    input {
       background-color: transparent;
       border: solid 2px #2B2D42;
       border-radius: 20px;
@@ -18,19 +49,22 @@ body{
       font-family: "Montserrat", sans-serif;
       width: 10vw;
     }
-    span{
+
+    span {
       background-color: transparent;
       border: none;
       position: absolute;
       margin-left: -28vw;
       font-size: 15px;
     }
-    h1{
+
+    h1 {
       font-size: 4vw;
       text-align: center;
       margin-bottom: 10vh;
     }
-    button{
+
+    button {
       background-color: #2B2D42;
       border: none;
       border-radius: 20px;
@@ -41,11 +75,21 @@ body{
       width: 10vw;
       cursor: pointer;
     }
-    button:hover{
+
+    button:hover {
       background-color: #3c3e53;
     }
+
+    .center-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      gap: 2vw;
+    }
   }
-  header.scrolled{
+
+  header.scrolled {
     transition: 0.3s;
     top: 0;
     left: 0;
@@ -54,72 +98,88 @@ body{
     width: 100vw;
     height: 10vh;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    input{
+
+    input {
       font-size: 1vw;
     }
-    h1{
+
+    h1 {
       margin: 2vh;
       font-size: 2vw;
     }
-    span{ 
+
+    span {
       margin-left: -21vw;
     }
   }
-  nav{
-    ul{
+
+  nav {
+    ul {
       list-style: none;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1vw;
       margin: 0;
-      li{
+
+      li {
         padding: 10px;
       }
     }
-    button{
+
+    button {
       background-color: transparent;
       border: none;
       font-family: "Montserrat", sans-serif;
       font-weight: 600;
     }
-    button:hover{
+
+    button:hover {
       cursor: pointer;
       text-decoration: underline;
       text-underline-offset: 20px;
       text-decoration-thickness: 1.5px;
     }
-    button.selected{
+
+    button.selected {
       text-decoration: underline;
       text-underline-offset: 20px;
       text-decoration-thickness: 3px;
     }
   }
-  .news{
-    h1{
+
+  .news {
+    h1 {
       display: inline;
       padding-right: 0.5em;
       margin-bottom: 5vh;
     }
-    #General{
+
+    #General {
       background: linear-gradient(to top, #FFA5CD 50%, transparent 50%);
     }
-    #Business{
-      background: linear-gradient(to top, #FC9069 50%, transparent 50%);        
+
+    #Business {
+      background: linear-gradient(to top, #FC9069 50%, transparent 50%);
     }
-    #Entertainment{
-      background: linear-gradient(to top, #FAC650 50%, transparent 50%);        
+
+    #Entertainment {
+      background: linear-gradient(to top, #FAC650 50%, transparent 50%);
     }
-    #Sports{
-      background: linear-gradient(to top, #b9ff5e 50%, transparent 50%);        
+
+    #Sports {
+      background: linear-gradient(to top, #b9ff5e 50%, transparent 50%);
     }
-    #Technology{
-      background: linear-gradient(to top, #70D2FF 50%, transparent 50%);        
+
+    #Technology {
+      background: linear-gradient(to top, #70D2FF 50%, transparent 50%);
     }
-    #Science{
-      background: linear-gradient(to top, #ff7070 50%, transparent 50%);        
+
+    #Science {
+      background: linear-gradient(to top, #ff7070 50%, transparent 50%);
     }
-    ul{
+
+    ul {
       margin-top: 10vh;
       display: flex;
       flex-wrap: wrap;
@@ -127,42 +187,53 @@ body{
       align-items: center;
       justify-content: center;
       gap: 5vw;
-      li:first-child{
+
+      li:first-child {
         width: 70vw;
-        img{
+
+        img {
           height: 50vh;
           width: 70vw;
         }
-        .description{
+
+        .description {
           display: block;
         }
       }
-      li{
+
+      li {
         width: 30vw;
-        img{
+
+        img {
           height: 40vh;
           width: 30vw;
           object-fit: cover;
           border-radius: 5px;
         }
-        h2{
+
+        h2 {
           font-size: 20px;
         }
-        .description{
+
+        .description {
           display: none;
         }
-        .article-info{
+
+        .article-info {
           font-family: "Montserrat", sans-serif;
           font-size: 10px;
           display: flex;
           align-items: center;
-          a{
+
+          a {
             color: #2B2D42;
           }
-          a:hover{
+
+          a:hover {
             color: #000000;
           }
-          hr{
+
+          hr {
             width: 10px;
             margin: 0 20px;
             height: 0px;
@@ -172,5 +243,5 @@ body{
       }
     }
   }
-  
+
 }
