@@ -72,6 +72,10 @@ body{
       justify-content: center;
       align-items: center;
       gap: 1vw;
+      margin: 0;
+      li{
+        padding: 10px;
+      }
     }
     button{
       background-color: transparent;
