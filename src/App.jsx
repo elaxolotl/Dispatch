@@ -105,15 +105,40 @@ function App() {
     const weeks = Math.floor(days / 7);
 
     if (seconds < 60) {
-      return `${seconds} seconds ago`;
+      if (seconds == 1) {
+        return '1 second ago'
+      }
+      else {
+        return `${seconds} seconds ago`;
+      }
     } else if (minutes < 60) {
-      return `${minutes} minute(s) ago`;
+      if (minutes == 1) {
+        return '1 minute ago'
+      }
+      else {
+        return `${minutes} minutes ago`;
+      }
     } else if (hours < 24) {
-      return `${hours} hour(s) ago`;
+      if (hours == 1) {
+        return '1 hour ago'
+      }
+      else {
+        return `${hours} hours ago`;
+      }
     } else if (days < 7) {
-      return `${days} day(s) ago`;
+      if (days == 1) {
+        return '1 day ago'
+      }
+      else {
+        return `${days} days ago`;
+      }
     } else {
-      return `${weeks} week(s) ago`;
+      if (weeks == 1) {
+        return '1 week ago'
+      }
+      else {
+        return `${weeks} weeks ago`;
+      }
     }
   }
 
@@ -160,7 +185,7 @@ function App() {
   return (
     <>
       <header>
-        <div className="region"><IoGlobeOutline />
+        <div className="region" ><IoGlobeOutline />
           <ul className='countries'>
             {regions.map((item) => (<li onClick={handleRegion} ><ReactCountryFlag id='flag' className={item} countryCode={item} svg /></li>))}
           </ul>
