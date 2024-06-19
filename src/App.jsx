@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
+import './mediaQueries.css'
 import { IoSearch } from "react-icons/io5";
 import { IoGlobeOutline } from "react-icons/io5";
 import ReactCountryFlag from "react-country-flag"

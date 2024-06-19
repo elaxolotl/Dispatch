@@ -1,0 +1,138 @@
+@media only screen and (max-width: 600px) {
+    * {
+        overflow-x: hidden !important;
+    }
+
+    body {
+        margin: 2vh 5vw;
+
+        header {
+            margin-bottom: 5vh;
+            align-items: end;
+
+            .region {
+                font-size: 5vw;
+            }
+
+            input {
+                padding: 5px 20px !important;
+                width: 10vw !important;
+                font-size: 2vw;
+            }
+
+            span {
+                display: none;
+            }
+
+            h1 {
+                font-size: 5vw !important;
+                margin-bottom: 0vh !important;
+            }
+
+            button {
+                padding: 6px 0px !important;
+                font-size: 2vw !important;
+                width: 20vw !important;
+            }
+
+            .center-content {
+                align-items: end;
+            }
+        }
+
+        header.scrolled {
+            padding-bottom: 2vh !important;
+            margin-top: -3vh;
+
+            .region {
+                margin-left: 4vw !important;
+            }
+
+            input {
+                font-size: 2vw !important;
+            }
+        }
+    }
+
+    nav {
+        ul {
+            gap: 1vw;
+            padding: 5px 0 !important;
+            gap: 2px;
+            li {
+                padding: 10px 0px !important;
+                font-size: 8px;
+                margin: 0 auto !important;
+            }
+
+        }
+
+        button:hover {
+            text-underline-offset: 10px !important;
+            text-decoration-thickness: 1px !important;
+        }
+
+        button.selected {
+            text-underline-offset: 10px;
+            text-decoration-thickness: 1px;
+        }
+    }
+
+    hr{
+        margin-top: -8px;
+        margin-bottom: 5vh;
+    }
+
+    .news {
+        margin: 0vh 10vw ;
+        h1 {
+            font-size: 7vw;
+            margin: 5vh 0vw !;
+        }
+
+        ul {
+            margin-top: 5vh !important;
+            padding: 0;
+            li:first-child {
+                width: 90vw !important;
+
+                img {
+                    height: 30vh !important;
+                }
+
+                h2{
+                    font-size: 15px !important;
+                }
+
+                .description {
+                    display: block;
+                    font-size: 10px;
+                }
+            }
+
+            li {
+                img {
+                    height: 20vh !important;
+                }
+
+                h2 {
+                    font-size: 10px !important;
+                }
+
+                .article-info {
+                    font-size: 5px !important;
+                    display: flex;
+                    align-items: center;
+
+                    hr {
+                        width: 15px !important;
+                        margin: 0 5px !important;
+                        height: 0px;
+                        border: solid #61647a 0.1px !important;
+                    }
+                }
+            }
+        }
+    }
+
+}
